@@ -1,1 +1,1 @@
-web: gunicorn vocabulary.wsgi --log-file -
+web: gunicorn CVPlatform.wsgi --log-file -
