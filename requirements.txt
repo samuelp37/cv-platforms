@@ -1,0 +1,8 @@
+dj-database-url
+django
+gunicorn
+psycopg2-binary
+whitenoise
+django-heroku
+django-crispy-forms
+factory-boy

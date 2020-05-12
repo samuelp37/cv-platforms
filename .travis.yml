@@ -1,0 +1,21 @@
+language: python
+python:
+  - "3.8"
+# command to install dependencies
+install:
+  - pip install -r requirements.txt
+services:
+  - postgresql
+# command to run tests
+before_script:
+  - psql -c "CREATE DATABASE test_db;" -U postgres
+script:
+  - python manage.py collectstatic --noinput
+  - python manage.py test
+deploy:
+  provider: heroku
+  api_key:
+    secure: "R+SwjFs4PIG+YkSjeNxHzr3c+X3lDLJ8SlxzE1rEJ9IdD3Bh19lW+nTREOFd7b58rF7gyyPLn97Q+qnTZY+GufqFdi9LiCfphnkOkwC/WVcerO4cpuSKEhw9+f87hIHA6lO7asBxL42spK8TzVMi7TtlN+xnHz/mTFs4NebLPO95NzhLBP46wZk5ycpPQME1WRyiohhWJNFr/HCc2JXzHckVZsFeLoBRah1PGj79WHyiwoiNBP6ln8gfttjj856QsrKiuoXda/MyI6eaV/j5qFeQN0B0qYRZnt0NnhGcJpyeigQqtf7mOa8eYH0dqRNSSit4u1Ho54mY6D9K/cH5B3Dnotem58EZPAGbYfl6tsocpYBbeglgEuWj9uLkTOMe6HqTQ1uMYJ0duUyCMgrPIayWPXYXkuUcbJe7FBToLMbpjrLExKx2YKucrhxUFXCYUX2PkNlEVtPZTWdkLu62vR0Jf27nGHHyk3/HtkHylS0kvbxms07WHBzRtqXkmVCC7S71/oe84F4c1kC7QjK0etqMpNzOlZleD1keRe3Wwi5WIWVBcyjuYT5Kd93hY9yZlG/RoayIc8ARkyoUdaNCIqTJS+n73F2OnKzm97v/099yWQjfLprvaPova24+/erybVCYKn8TTAxlEH0ABNqcRuBfbcqZekwIbckzt/Vo3Y8="
+  app: cvplatform
+  on:
+    repo: samuelp37/cv-platforms
